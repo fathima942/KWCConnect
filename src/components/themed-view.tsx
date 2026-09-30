@@ -1,16 +1,16 @@
 import { View, type ViewProps } from 'react-native';
-
-import { ThemeColor } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { AppTheme } from '@/types/theme';
 
 export type ThemedViewProps = ViewProps & {
-  lightColor?: string;
-  darkColor?: string;
-  type?: ThemeColor;
+  themeColor?: keyof AppTheme['colors'];
 };
 
-export function ThemedView({ style, lightColor, darkColor, type, ...otherProps }: ThemedViewProps) {
+/**
+ * A themed View component that consumes the KWC Design System.
+ */
+export function ThemedView({ style, themeColor = 'background', ...otherProps }: ThemedViewProps) {
   const theme = useTheme();
 
-  return <View style={[{ backgroundColor: theme[type ?? 'background'] }, style]} {...otherProps} />;
+  return <View style={[{ backgroundColor: theme[themeColor] }, style]} {...otherProps} />;
 }

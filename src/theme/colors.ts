@@ -15,6 +15,8 @@ export const colors: ColorTokens = {
   warning: '#F9A825',
   error: '#C62828',
   divider: '#E0E0E0',
+  backgroundSelected: '#F0F0F3',
+  backgroundElement: '#F0F0F3',
 };
 
 /**
@@ -27,4 +29,6 @@ export const darkColors: ColorTokens = {
   textPrimary: '#F8F9FA',
   textSecondary: '#B0B0B0',
   divider: '#333333',
+  backgroundSelected: '#2E3135',
+  backgroundElement: '#212225',
 };

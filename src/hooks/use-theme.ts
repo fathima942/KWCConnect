@@ -1,14 +1,13 @@
 /**
- * Learn more about light and dark modes:
- * https://docs.expo.dev/guides/color-schemes/
+ * Custom hook to access the KWC Design System theme based on the current color scheme.
  */
 
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useColorScheme } from 'react-native';
+import { colors, darkColors } from '@/theme/colors';
 
 export function useTheme() {
   const scheme = useColorScheme();
-  const theme = scheme === 'unspecified' ? 'light' : scheme;
+  const isDark = scheme === 'dark';
 
-  return Colors[theme];
+  return isDark ? darkColors : colors;
 }

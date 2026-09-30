@@ -14,6 +14,8 @@ export interface ColorTokens {
   warning: string;
   error: string;
   divider: string;
+  backgroundSelected: string;
+  backgroundElement: string;
 }
 
 export interface TypographyVariant {

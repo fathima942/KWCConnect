@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Function to check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Function to check if user is accessing their own document
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Function to check user role from the profile
+    function hasRole(role) {
+      return isAuthenticated() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == role;
+    }
+
+    // USER PROFILES
+    match /users/{userId} {
+      // Users can read their own profile
+      allow read: if isOwner(userId) || hasRole('officer') || hasRole('admin');
+
+      // Initial creation: allow if it's their own UID and they are setting default role
+      allow create: if isOwner(userId)
+                    && request.resource.data.role == 'citizen'
+                    && request.resource.data.uid == userId;
+
+      // Updates: allow if owner, but prevent changing sensitive fields like 'role'
+      allow update: if isOwner(userId)
+                    && request.resource.data.role == resource.data.role
+                    && request.resource.data.uid == resource.data.uid;
+
+      // Only admins can delete profiles or change roles
+      allow delete: if hasRole('admin');
+    }
+
+    // COMPLAINTS (Placeholder for future phases)
+    match /complaints/{complaintId} {
+      allow read: if isAuthenticated() && (resource.data.citizenUid == request.auth.uid || hasRole('officer') || hasRole('admin'));
+      allow create: if isAuthenticated() && request.resource.data.citizenUid == request.auth.uid;
+      allow update: if isAuthenticated() && (resource.data.citizenUid == request.auth.uid || hasRole('officer') || hasRole('admin'));
+    }
+  }
+}

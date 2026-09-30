@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "454562348361",
+    "project_id": "kwc-connect",
+    "storage_bucket": "kwc-connect.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454562348361:android:78494b6ede4dcc14d6ae98",
+        "android_client_info": {
+          "package_name": "com.anonymous.KWCConnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1pVqEXCSehftquT997Z02fSzvqh4esSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
